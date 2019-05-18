@@ -83,7 +83,7 @@
       // Question: What does this code do??
       fetch("/api/characters", {
         method: "POST",
-        body: newCharacter,
+        body: JSON.stringify(newCharacter),
         headers: {
           'Content-Type': 'application/json'
         }
