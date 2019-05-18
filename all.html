@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Star Wars - Express</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Star Wars Express</h1>
+      <h3>The greatest resource in the galaxy for Star Wars statistics!</h3>
+      <hr>
+      <a href="/"><button class="btn btn-danger btn-lg"><span class="fa fa-eye"></span> Search Characters</button></a>
+      <a href="/add"><button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span> Add New Character</button></a>
+    </div>
+    <div class="row">
+
+      <div class="col-12">
+
+        <div class="card">
+          <div class="card-header">
+            <strong>Character Database</strong></h3>
+          </div>
+          <div class="card-body">
+            <ul id="character-section" class="list-group">
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+      fetch("/api/characters")
+      .then(response => response.json())
+      .then(data => {
+        let characterSection = document.querySelector('#character-section')
+        for (let character of data) {
+          console.log(character)
+          characterSection.insertAdjacentHTML('afterbegin', `<li class='list-group-item'>
+          <h2 class="name">${character.name}</h2>
+                <div class="stats">
+                  <h3><strong>Role:</strong> <span class="role">${character.role}</span></h3>
+                  <h3><strong>Age:</strong> <span class="season">${character.age}</span></h3>
+                  <h3><strong>Force Points:</strong> <span class="drag-points">${character.forcePoints}</span></h3>
+                </div><hr>`)
+        }
+      });
+    </script>
+
+</body>
+
+</html>
